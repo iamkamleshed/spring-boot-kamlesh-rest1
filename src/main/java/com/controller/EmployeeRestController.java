@@ -24,7 +24,7 @@ public class EmployeeRestController {
 	@Autowired
 	EmployeeService employeeService;
 
-	@GetMapping("/employees") //localhost:9999/v1/employees
+	@GetMapping("/employees") // localhost:9999/v1/employees
 	List<EmployeeEntity> giveAllEmployees() {
 		List<EmployeeEntity> listOfEmployees = employeeService.findAllEmployees();
 		return listOfEmployees;
@@ -42,7 +42,7 @@ public class EmployeeRestController {
 			employeeService.saveEmployee(employeeEntity);
 		} catch (DataIntegrityViolationException e) {
 			return "Duplicate Email is not allowed.";
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return "Some issues";
 		}
 		return "registered successfully";
@@ -51,11 +51,11 @@ public class EmployeeRestController {
 	@DeleteMapping("/employees/{id}")
 	String deleteEmployee(@PathVariable int id) {
 		try {
-		employeeService.deleteEmployee(id);
+			employeeService.deleteEmployee(id);
 		} catch (Exception e) {
 			return "Id doesn't exists in the db or cannot be deleted.";
 		}
-		
+
 		return "Deleted successfully.";
 	}
 
@@ -66,19 +66,18 @@ public class EmployeeRestController {
 			employeeService.updateEmployee(employeeEntity);
 		} catch (DataIntegrityViolationException e) {
 			return "Duplicate Email is not allowed.";
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return "Id not present in the database";
 		}
 		return "updated successfully";
 	}
 
-	/*
-	 * Another method
-	 * 
-	 * @PutMapping("/employees") String updateEmployee(@RequestBody EmployeeEntity
-	 * employeeEntity) { employeeService.updateEmployee( employeeEntity); return
-	 * "updated successfully."; }
-	 */
+//	// Another method
+//
+//	@PutMapping("/employees")
+//	String updateEmployee(@RequestBody EmployeeEntity employeeEntity) {
+//		employeeService.updateEmployee(employeeEntity);
+//		return "updated successfully.";
+//	}
 
 }
